@@ -1,4 +1,4 @@
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
@@ -7,6 +7,7 @@ const server = new McpServer({
     title: "My MCP Server Title",
     version: "1.0.0",
 });
+
 server.registerTool(
     "sum",
     {
@@ -28,5 +29,5 @@ server.registerTool(
         };
     }
 );
-const transport = new StdioClientTransport();
+const transport = new StdioServerTransport();
 server.connect(transport);
