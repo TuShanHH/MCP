@@ -3,16 +3,16 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
 const server = new McpServer({
-    name: "My MCP Server",
-    title: "My MCP Server Title",
+    name: "我的mcp服务器",
+    title: "第一个mcp服务器",
     version: "1.0.0",
 });
 
 server.registerTool(
-    "sum",
+    "求和",
     {
-        title: "Sum two numbers",
-        description: "Returns the sum of two numbers",
+        title: "两数之和",
+        description: "返回两个数字的和",
         inputSchema: {
             a: z.number().describe("First number"),
             b: z.number().describe("Second number"),
