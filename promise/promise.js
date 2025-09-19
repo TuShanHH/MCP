@@ -31,4 +31,3 @@ class MyPromise {
     }
 }
 export default MyPromise;
-// process.on("unhandledRejection", () => {});

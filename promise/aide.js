@@ -80,4 +80,4 @@ function toResolve(p, value) {
     handleTasks(p);
 }
 
-export { toResolve, toReject, handleTasks, isFunction };
+export { toResolve, toReject, handleTasks };
