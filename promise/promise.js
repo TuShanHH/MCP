@@ -30,4 +30,5 @@ class MyPromise {
         return newPromise;
     }
 }
+
 export default MyPromise;
