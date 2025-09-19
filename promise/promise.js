@@ -1,9 +1,10 @@
-
+import { toResolve, toReject, handleTasks } from "./aide.js";
 
 class MyPromise {
     _state = "pending"; //promise状态
-    _value = undefined; //成功的值
-    _reason = undefined; //失败的原因
+    _value = undefined; //promise功的值
+    _reason = undefined; //promise败的原因
+    _tasks = []; //then方法中的任务队列
 
     constructor(executor) {
         const resolve = (value) => {
@@ -13,18 +14,21 @@ class MyPromise {
             toReject(this, reason);
         };
 
-        executor(resolve, reject);
+        try {
+            executor(resolve, reject);
+        } catch (err) {
+            reject(err);
+        }
     }
 
-    then() {}
+    then(onFulfilled, onRejected) {
+        const newPromise = new MyPromise(() => {});
+
+        this._tasks.push({ onFulfilled, onRejected, newPromise });
+        handleTasks(this);
+
+        return newPromise;
+    }
 }
-
-const p = new MyPromise((resolve, reject) => {
-    reject("捕获到错误");
-    resolve(1000);
-});
-
-const pro = new Promise((resolve, reject) => {
-    reject("捕获到错误");
-});
-console.log(pro);
+export default MyPromise;
+// process.on("unhandledRejection", () => {});
